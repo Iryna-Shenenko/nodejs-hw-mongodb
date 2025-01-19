@@ -33,7 +33,7 @@ export const setupServer = () => {
         const {contactId} = req.params;
         const contact = await getContactById(contactId);
         if (!contact){
-            res.status(400).json({
+            res.status(404).json({
                 status: 404,
                 message: 'Contact not found',
             });
