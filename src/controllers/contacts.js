@@ -1,8 +1,7 @@
 import { createContact, getAllContacts, getContactById, deleteContact, updateContact } from "../services/contacts.js";
 import createHttpError from "http-errors";
 
-export const getContactsController = async (req, res, next) => {
-    try {
+export const getContactsController = async (req, res) => {
     const response = await getAllContacts();
 
 
@@ -11,11 +10,11 @@ export const getContactsController = async (req, res, next) => {
         message: 'Successfully found students!',
         data: response,
     });
-} catch (err) {
-    next(err);
-}
 };
- export const getContactByIdController = async (req, res) => {
+
+
+
+ export const getContactByIdController = async (req, res, next) => {
     const {contactId} = req.params;
     const response = await getContactById (contactId);
     if (!response){
