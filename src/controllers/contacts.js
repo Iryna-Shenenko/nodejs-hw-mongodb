@@ -50,7 +50,11 @@ export const getContactsController = async (req, res) => {
         const student = deleteContact(contactId);
 
         if(!student){
-            next(createHttpError(404, 'Contact not found'));
+            res.status(404).json({
+                status: 404,
+                message: 'Contact not found',
+                data: null,
+            });
             return;
         }
         res.status(204).send();
@@ -67,6 +71,6 @@ if(!result) {
 res.json({
     status: 200,
     message: `Successfully patched a contact!`,
-    data: result.contact,
+    data: result.student,
   });
     };
