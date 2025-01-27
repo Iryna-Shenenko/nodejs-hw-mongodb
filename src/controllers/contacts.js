@@ -51,12 +51,9 @@ export const getContactsController = async (req, res) => {
         const student = await deleteContact(contactId);
 
         if(!student){
-            res.status(404).json({
-                status: 404,
-                message: 'Contact not found',
-                data: null,
-            });
-            return;
+
+            next(createHttpError(404, 'Contact not found'));
+    return;
         }
         res.status(204).json({
             status: 204,
