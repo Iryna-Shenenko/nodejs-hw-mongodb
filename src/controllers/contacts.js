@@ -46,8 +46,9 @@ export const getContactsController = async (req, res) => {
     });
 };
     export const deleteContactController = async (req, res, next) => {
-        const {contactId} = req.params;
-        const student = deleteContact(contactId);
+        try {
+            const {contactId} = req.params;
+        const student = await deleteContact(contactId);
 
         if(!student){
             res.status(404).json({
@@ -57,8 +58,15 @@ export const getContactsController = async (req, res) => {
             });
             return;
         }
-        res.status(204).send();
-    };
+        res.status(204).json({
+            status: 204,
+            message: 'Contact successfully deleted',
+            data: student,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
 
     export const patchContactController = async (req, res, next) => {
 const {contactId} = req.params;
