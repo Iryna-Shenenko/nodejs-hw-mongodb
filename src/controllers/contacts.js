@@ -1,8 +1,24 @@
 import { createContact, getAllContacts, getContactById, deleteContact, updateContact } from "../services/contacts.js";
 import createHttpError from "http-errors";
+import { parsePaginationParams } from "../utils/parsePaginationParams.js";
+import { parseSortParams } from "../utils/parseSortParams.js";
+import { parseFilterParams } from "../utils/parseFilterParams.js";
+
+
 
 export const getContactsController = async (req, res) => {
-    const response = await getAllContacts();
+    const {page, perPage} = parsePaginationParams(req.query);
+
+    const {sortBy, sortOrder} = parseSortParams(req.query);
+    const filter = parseFilterParams(req.query);
+
+    const response = await getAllContacts({
+        page,
+        perPage,
+        sortBy,
+        sortOrder,
+        filter,
+    });
 
 
     res.json ({
@@ -79,3 +95,22 @@ res.json({
     data: result.student,
   });
     };
+
+    export const upsertContactController = async (req,res, next) => {
+        const {contactId} = req.params;
+        const result = await updateContact(contactId, req.body, {
+            upsert: true,
+        });
+        if (!result) {
+            next(createHttpError(404, 'Contact not founder'));
+            return;
+        }
+        const status = result.isNew ? 201 : 200;
+        res.status(status).json({
+            status,
+            message: `Successfully upserted a contact!`,
+            data: result.contact,
+        });
+    };
+
+
