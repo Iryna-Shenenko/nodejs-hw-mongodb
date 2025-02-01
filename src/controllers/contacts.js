@@ -53,12 +53,12 @@ export const getContactsController = async (req, res) => {
             message: 'Name, phone number, and contact type are required.',
         });
     }
-    const student = await createContact(req.body);
+    const contact = await createContact(req.body);
 
     res.status(201).json({
         status:201,
         message:`Successfully created a contact!`,
-        data: student,
+        data: contact,
     });
 };
     export const deleteContactController = async (req, res, next) => {
