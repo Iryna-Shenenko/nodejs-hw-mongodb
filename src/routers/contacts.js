@@ -8,16 +8,16 @@ import { isValidId } from '../validation/isValidId.js';
 
 const router = Router();
 
-router.get('/contacts',ctrlWrapper(getContactsController));
+router.get('/',ctrlWrapper(getContactsController));
 
 
-router.get('/contacts/:contactId', isValidId, ctrlWrapper(getContactByIdController));
+router.get('/:contactId', isValidId, ctrlWrapper(getContactByIdController));
 
-router.post('/contacts', validateBody(createContactSchema), ctrlWrapper(createContactController));
-router.delete('/contacts/:contactId', isValidId,  ctrlWrapper(deleteContactController));
-router.put('/contacts/:contactId', validateBody(createContactSchema),ctrlWrapper(upsertContactController));
+router.post('/register', validateBody(createContactSchema), ctrlWrapper(createContactController));
+router.delete('/:contactId', isValidId,  ctrlWrapper(deleteContactController));
+router.put('/:contactId',isValidId, validateBody(createContactSchema),ctrlWrapper(upsertContactController));
 
-router.patch('/contacts/:contactId', isValidId, validateBody(updateContactSchema),ctrlWrapper(patchContactController));
+router.patch('/:contactId', isValidId, validateBody(updateContactSchema),ctrlWrapper(patchContactController));
 
 export default router;
 
