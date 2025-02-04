@@ -1,3 +1,4 @@
+
 import { model, Schema } from "mongoose";
 
 const studentsSchema = new Schema (
@@ -22,6 +23,11 @@ const studentsSchema = new Schema (
         isFavourite: {
           type: Boolean,
           default: false,
+        },
+        userId: {
+          type: Schema.Types.ObjectId,
+          ref: 'users',
+          required: true,
         },
       },
       {
