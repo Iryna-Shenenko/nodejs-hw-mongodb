@@ -1,6 +1,6 @@
 import createHttpError from "http-errors";
 
-import { SessionCollection } from "../db/models/session.js";
+import { SessionsCollection } from "../db/models/session.js";
 import { UsersCollection } from "../db/models/user.js";
 
 export const authenticate = async (req, res, next) => {
@@ -10,15 +10,15 @@ export const authenticate = async (req, res, next) => {
         next(createHttpError(401, 'Please provide Authorization header' ));
         return;
     }
-    const bearer = authHeader.split('')[0];
-    const token = authHeader.split('')[1];
+    const bearer = authHeader.split(' ')[0];
+    const token = authHeader.split(' ')[1];
 
     if(bearer !== 'Bearer' || !token) {
         next(createHttpError(401, 'Auth header should be of type Bearer'));
         return;
     }
 
-    const session = await SessionCollection.findOne({accessToken: token});
+    const session = await SessionsCollection.findOne({accessToken: token});
     if (!session) {
         next(createHttpError(401, 'Session not found'));
         return;
