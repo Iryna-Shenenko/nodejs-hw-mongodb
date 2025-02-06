@@ -20,7 +20,7 @@ contactsRouter.delete('/:contactId', isValidId,  ctrlWrapper(deleteContactContro
 contactsRouter.put('/:contactId', isValidId, validateBody(createContactSchema),ctrlWrapper(upsertContactController));
 
 contactsRouter.patch('/:contactId', isValidId, validateBody(updateContactSchema),ctrlWrapper(patchContactController));
-contactsRouter.use(authenticate);
+contactsRouter.use('/', authenticate);
 
 
 
