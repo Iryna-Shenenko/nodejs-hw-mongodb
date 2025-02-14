@@ -86,6 +86,7 @@ export const getContactsController = async (req, res) => {
 };
 
     export const patchContactController = async (req, res, next) => {
+       try {
         const{_id: userId} = req.user;
 const {contactId} = req.params;
 const photo = req.file;
@@ -110,8 +111,12 @@ if(!result) {
 res.json({
     status: 200,
     message: `Successfully patched a contact!`,
-    data: result.student,
+    data: result.contact,
   });
+}catch(error){
+    next(error);
+}
+
     };
 
     export const upsertContactController = async (req,res, next) => {
