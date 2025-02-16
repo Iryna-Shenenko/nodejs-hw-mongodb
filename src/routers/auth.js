@@ -23,8 +23,8 @@ authRouter.post(
     validateBody(loginUserSchema),
     ctrlWrapper(loginUserController),
 );
-authRouter.post('/request-reset-email', validateBody(requestResetEmailSchema), ctrlWrapper(requestRestEmailController),);
-authRouter.post('/reset-password',
+authRouter.post('/send-reset-email', validateBody(requestResetEmailSchema), ctrlWrapper(requestRestEmailController),);
+authRouter.post('/reset-pwd',
     validateBody(resetPasswordSchema),
     ctrlWrapper(resetPasswordController),
 );
