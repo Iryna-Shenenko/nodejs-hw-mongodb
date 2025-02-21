@@ -14,7 +14,7 @@
       "url": "http://localhost:3000"
     },
     {
-      "url": "https://swagger-dn3g.onrender.com"
+      "url": "https://nodejs-hw-mongodb-6-784s.onrender.com"
     }
   ],
   "tags": [
@@ -350,36 +350,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Delete contact",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 204
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully deleted contact!"
-                    },
-                    "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/contact"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
+            "description": "Delete contact"
           },
           "404": {
             "$ref": "#/components/responses/404"
